@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>氧一氧吧智龙虾智能体赋能方案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E3A5F',
+            'accent-1': '#2E8B8B',
+            'accent-2': '#F4A261',
+            neutral: '#5A6A7A',
+          },
+          fontFamily: {
+            title: ['Montserrat', 'Noto Sans SC', 'sans-serif'],
+            body: ['Inter', 'Noto Sans SC', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --primary-color: #1E3A5F;
+      --accent-color-1: #2E8B8B;
+      --accent-color-2: #F4A261;
+      --neutral-color: #5A6A7A;
+      --slide-background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+    .slide-bg {
+      background: var(--slide-background);
+    }
+    .text-primary { color: var(--primary-color); }
+    .text-accent-1 { color: var(--accent-color-1); }
+    .text-accent-2 { color: var(--accent-color-2); }
+    .bg-primary { background-color: var(--primary-color); }
+    .bg-accent-1 { background-color: var(--accent-color-1); }
+    .bg-accent-2 { background-color: var(--accent-color-2); }
+    .border-primary { border-color: var(--primary-color); }
+    .border-accent-1 { border-color: var(--accent-color-1); }
+    .border-accent-2 { border-color: var(--accent-color-2); }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      background: #1a1a1a;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    #app {
+      width: 1440px;
+      height: 810px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .slide-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .nav-hint {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #666;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="slide-container" id="slide-container"></div>
+  </div>
+  <div class="nav-hint">使用 ← → 方向键或点击切换页面</div>
+  
+  <script>
+    window.slideDataMap = new Map();
+  </script>
+  <script src="src/slides/slide-1.js"></script>
+  <script src="src/slides/slide-2.js"></script>
+  <script src="src/slides/slide-3.js"></script>
+  <script src="src/slides/slide-4.js"></script>
+  <script src="src/slides/slide-5.js"></script>
+  <script src="src/slides/slide-6.js"></script>
+  <script src="src/slides/slide-7.js"></script>
+  <script src="src/slides/slide-8.js"></script>
+  <script src="src/slides/slide-9.js"></script>
+  <script src="src/slides/slide-10.js"></script>
+  <script src="src/slides/slide-11.js"></script>
+  <script src="src/slides/slide-12.js"></script>
+  <script src="src/slides/slide-13.js"></script>
+  <script src="src/slides/slide-14.js"></script>
+  <script src="src/slides/slide-15.js"></script>
+  <script src="src/slides/slide-16.js"></script>
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 16;
+    
+    function showSlide(n) {
+      const container = document.getElementById('slide-container');
+      if (window.slideDataMap.has(n)) {
+        container.innerHTML = window.slideDataMap.get(n);
+      }
+    }
+    
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+    
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+    
+    document.addEventListener('click', (e) => {
+      const rect = document.getElementById('app').getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      if (x > rect.width / 2) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    });
+    
+    window.onload = () => {
+      showSlide(1);
+    };
+  </script>
+</body>
+</html>
